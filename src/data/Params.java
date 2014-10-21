@@ -65,11 +65,11 @@ public class Params
 		{
 			for (int i = 0; i < Size / 2; i++)
 			{
-				SoftVersion[i] = data[i];
+				this.SoftVersion[i] = data[i];
 			}
 			for (int i = 0; i < Size / 2; i++)
 			{
-				ParamVersion[i] = data[i + Size / 2];
+				this.ParamVersion[i] = data[i + Size / 2];
 			}
 		}
 
@@ -130,7 +130,7 @@ public class Params
 		public byte Manual;
 		public byte Auto;
 		public short MoveDirection;
-		public byte MoveDuration;
+		public short MoveDuration;
 		public byte UDPLiveFeed;
 		public byte MotorPSEnable;
 		public int ParamID;
@@ -139,7 +139,7 @@ public class Params
 		public t_COMMAND_REG(int pid)
 		{
 			ParamID = pid;
-			Size = (Short.SIZE * 1 + Byte.SIZE * 5) / 8;
+			Size = (Short.SIZE * 2 + Byte.SIZE * 4) / 8;
 		}
 		public byte[] toBytes()
 		{
@@ -149,8 +149,9 @@ public class Params
 			data[2] = (byte) (0xFF & MoveDirection);
 			data[3] = (byte) ((0xFF00 & MoveDirection) >> 8);
 			data[4] = (byte) (0xFF & MoveDuration);
-			data[5] = (byte)  (0xFF & UDPLiveFeed);
-			data[6] = (byte)  (0xFF & MotorPSEnable);
+			data[5] = (byte) ((0xFF00 & MoveDuration) >> 8);
+			data[6] = (byte)  (0xFF & UDPLiveFeed);
+			data[7] = (byte)  (0xFF & MotorPSEnable);
 			return data;
 		}
 
@@ -159,9 +160,9 @@ public class Params
 			Manual = data[0]; 
 			Auto = data[1];
 			MoveDirection = CombineBytes(data[2], data[3]);
-			MoveDuration = data[4]; 
-			UDPLiveFeed = data[5]; 
-			MotorPSEnable = data[6]; 
+			MoveDuration = CombineBytes(data[4], data[5]);
+			UDPLiveFeed = data[6]; 
+			MotorPSEnable = data[7]; 
 			
 			
 		}
@@ -172,7 +173,7 @@ public class Params
 		public byte Manual;
 		public byte Auto;
 		public short MoveDirection;
-		public byte MoveDuration;
+		public short MoveDuration;
 		public byte UDPLiveFeed;
 		public byte MotorPSEnable;
 		public int ParamID;
@@ -181,7 +182,7 @@ public class Params
 		public t_STATUS_REG(int pid)
 		{
 			ParamID = pid;
-			Size = (Short.SIZE * 1 + Byte.SIZE * 5) / 8;
+			Size = (Short.SIZE * 2 + Byte.SIZE * 4) / 8;
 
 		}
 		public byte[] toBytes()
@@ -192,8 +193,9 @@ public class Params
 			data[2] = (byte) (0xFF & MoveDirection);
 			data[3] = (byte) ((0xFF00 & MoveDirection) >> 8);
 			data[4] = (byte) (0xFF & MoveDuration);
-			data[5] = (byte)  (0xFF & UDPLiveFeed);
-			data[6] = (byte)  (0xFF & MotorPSEnable);
+			data[5] = (byte) ((0xFF00 & MoveDuration) >> 8);
+			data[6] = (byte)  (0xFF & UDPLiveFeed);
+			data[7] = (byte)  (0xFF & MotorPSEnable);
 			return data;
 		}
 
@@ -202,9 +204,9 @@ public class Params
 			Manual = data[0]; 
 			Auto = data[1];
 			MoveDirection = CombineBytes(data[2], data[3]);
-			MoveDuration = data[4]; 
-			UDPLiveFeed = data[5]; 
-			MotorPSEnable = data[6]; 
+			MoveDuration = CombineBytes(data[4], data[5]);
+			UDPLiveFeed = data[6]; 
+			MotorPSEnable = data[7]; 
 			
 			
 		}
@@ -278,6 +280,11 @@ public class Params
 			ParamID = pid;
 			Size = (Short.SIZE * 2) / 8;
 
+		}
+		
+		public void SetParam(byte data[])
+		{
+			global_1 = 	CombineBytes(data[0], data[1]);
 		}
 	}
 

@@ -36,12 +36,14 @@ public class ComPool
 
 	static class QueueElementOut extends QueueElement
 	{
-		static private int outframeID;
+		static private int totaloutframeID;
+		private int outframeID;
 
 		public QueueElementOut(byte[] data, short length)
 		{
 			super(data, length);
-			outframeID++;
+			totaloutframeID++;
+			outframeID = totaloutframeID;
 		}
 
 		public int getOutframeID()
@@ -79,7 +81,7 @@ public class ComPool
 	public static int PostFrameRequest(RPK frame)
 	{
 		outQueue.add(new QueueElementOut(frame.toBytes(), frame.getLength()));
-		return QueueElementOut.outframeID;
+		return QueueElementOut.totaloutframeID;
 	}
 
 	public static boolean SendFrameNextRPK(OutputStream out,InputStream in) throws IOException
@@ -90,8 +92,8 @@ public class ComPool
 		byte[] data_in = new byte[RPK.RPK_MAX_DATA];
 		if (outQueue.size() > 0)
 		{
-			out.write(outQueue.element().getData(), 0, (int) outQueue.element().getLength());
-			fID = outQueue.element().getOutframeID();
+			out.write(outQueue.getFirst().getData(), 0, (int) outQueue.getFirst().getLength());
+			fID = outQueue.getFirst().getOutframeID();
 			outQueue.remove();
 			something_sent = true;
 			
@@ -108,14 +110,31 @@ public class ComPool
 	public static RPK GetFrameAnswer(int fID)
 	{
 		RPK frame = new RPK();
-		if (inQueue.size() > 0)
+		boolean pollqueue = false;
+		do
 		{
-			if (inQueue.element().getInframeID() == fID)
+			if (inQueue.size() > 0)
 			{
-				frame.Frame_Manage(inQueue.element().getData());
-				inQueue.remove();
+				if (inQueue.getFirst().getInframeID() == fID)
+				{
+					frame.Frame_Manage(inQueue.getFirst().getData());
+					inQueue.remove();
+					pollqueue = true;
+				}
 			}
-		}
+			if(pollqueue == false)
+			{
+				try
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}while(pollqueue == false);
+		
 		return frame;
 	}
 

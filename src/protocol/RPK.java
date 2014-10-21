@@ -1,5 +1,6 @@
 package protocol;
 
+import network.ComPool;
 import misc.CRC;
 
 
@@ -52,13 +53,17 @@ public class RPK
 		  version = RPK_VERSION;
 	}
 
-	public void Read(int paramID, int length)
+	public RPK Read(int paramID, int length)
 	{
 		this.length = HEADER_SIZE;
 		command = RPK_C_READ;
 		subcommand = RPK_SC_REQUEST;
 		option1 = (short)paramID;
 		option2 = (short)length;
+		
+		int fID = ComPool.PostFrameRequest(this);
+		
+		return ComPool.GetFrameAnswer(fID);
 		
 	}
 	
@@ -72,7 +77,7 @@ public class RPK
 		
 	}
 	
-	public void Write(int paramID, int length,byte[] data)
+	public RPK Write(int paramID, int length,byte[] data)
 	{
 		this.length = (short) (HEADER_SIZE + length);
 		command = RPK_C_WRITE;
@@ -80,6 +85,10 @@ public class RPK
 		option1 = (short)paramID;
 		option2 = (short)length;
 		this.data = data;
+		
+		int fID = ComPool.PostFrameRequest(this);
+		
+		return ComPool.GetFrameAnswer(fID);
 		
 	}
 	
