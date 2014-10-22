@@ -1,7 +1,5 @@
 package GUI;
 
-
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -24,6 +23,10 @@ import data.Params;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import network.Client;
+
+import java.awt.Font;
 
 public class ControlPanel extends JFrame
 {
@@ -129,11 +132,17 @@ public class ControlPanel extends JFrame
 	private JMenuItem mntmAbout;
 	private JMenuItem mntmManualCommand;
 	private JMenuItem mntmQuit;
+	private JMenuItem mntmConnectionSetting;
+	private JMenuItem mntmConnect;
+	private JMenuItem mntmDisconnect;
+	private JSeparator mntmSep1;
+	private JSeparator mntmSep2;
+	private JLabel lblNetStatus;
 
 	public ControlPanel()
 	{
 		setTitle("R-Pikee Pilot");
-		setSize(612, 542);
+		setSize(407, 476);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		main_panel = new JPanel();
@@ -681,8 +690,6 @@ public class ControlPanel extends JFrame
 		panel_button.add(btnUDPLiveFeed);
 		panel_button.add(btnMotorPSEnable);
 
-		
-
 		// ajout du panel à la fenetre
 		getContentPane().add(main_panel);
 
@@ -692,12 +699,29 @@ public class ControlPanel extends JFrame
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 
+		mntmConnect = new JMenuItem("Connect");
+
+		mnFile.add(mntmConnect);
+
+		mntmDisconnect = new JMenuItem("Disconnect");
+
+		mnFile.add(mntmDisconnect);
+
+		mntmSep1 = new JSeparator();
+		mnFile.add(mntmSep1);
 		mntmQuit = new JMenuItem("Quit");
 
 		mnFile.add(mntmQuit);
 
 		mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
+
+		mntmConnectionSetting = new JMenuItem("Connection Setting");
+
+		mnTools.add(mntmConnectionSetting);
+
+		mntmSep2 = new JSeparator();
+		mnTools.add(mntmSep2);
 
 		mntmManualCommand = new JMenuItem("Manual Command");
 
@@ -707,10 +731,13 @@ public class ControlPanel extends JFrame
 		menuBar.add(mnAbout);
 
 		mntmAbout = new JMenuItem("About");
-		
+
 		mnAbout.add(mntmAbout);
 		
-		
+		lblNetStatus = new JLabel("Net Status");
+		lblNetStatus.setFont(new Font("Dialog", Font.PLAIN, 12));
+		menuBar.add(lblNetStatus);
+
 		btnManual.addActionListener(new ActionListener()
 		{
 			@Override
@@ -757,7 +784,7 @@ public class ControlPanel extends JFrame
 
 			}
 		});
-		
+
 		mntmAbout.addActionListener(new ActionListener()
 		{
 			@Override
@@ -775,7 +802,54 @@ public class ControlPanel extends JFrame
 				it_ManualCommandClick(e);
 			}
 		});
-		
+
+		mntmConnect.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				it_ConnectClick(e);
+			}
+		});
+
+		mntmDisconnect.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				it_DisconnectClick(e);
+			}
+		});
+
+		mntmConnectionSetting.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				it_ConnectionSettingClick(e);
+			}
+		});
+
+	}
+	
+	private void it_ConnectClick(ActionEvent e)
+	{
+		Client.setConnect(true);
+	}
+	
+	private void it_DisconnectClick(ActionEvent e)
+	{
+		Client.setConnect(false);
+	}
+	private void it_ConnectionSettingClick(ActionEvent e)
+	{
+		NetworkConfig fen = new NetworkConfig();
+		fen.setVisible(true);
+	}
+
+	public void setLblNetStatus(String lblNetStatus)
+	{
+		this.lblNetStatus.setText(lblNetStatus);
 	}
 
 	private void it_quitActionClick(ActionEvent e)
@@ -785,14 +859,13 @@ public class ControlPanel extends JFrame
 
 	private void it_AboutClick(ActionEvent e)
 	{
-		JOptionPane.showMessageDialog(this, "RPi-kee Pilot v0.01 , a JAVA Gui by MPE",
-				"About", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "RPi-kee Pilot v0.01 , a JAVA Gui by MPE", "About", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	private void it_ManualCommandClick(ActionEvent e)
 	{
 		ManualCommandPanel fen = new ManualCommandPanel();
-		
+
 		fen.setVisible(true);
 	}
 

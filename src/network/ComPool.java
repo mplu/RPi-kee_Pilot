@@ -90,7 +90,7 @@ public class ComPool
 		int size = 0;
 		int fID;
 		byte[] data_in = new byte[RPK.RPK_MAX_DATA];
-		if (outQueue.size() > 0)
+		if ((outQueue.size() > 0)&&(Client.isConnected()==true))
 		{
 			out.write(outQueue.getFirst().getData(), 0, (int) outQueue.getFirst().getLength());
 			fID = outQueue.getFirst().getOutframeID();
@@ -111,6 +111,7 @@ public class ComPool
 	{
 		RPK frame = new RPK();
 		boolean pollqueue = false;
+		int timer = 1000;
 		do
 		{
 			if (inQueue.size() > 0)
@@ -127,13 +128,14 @@ public class ComPool
 				try
 				{
 					Thread.sleep(100);
+					timer-=100;
 				} catch (InterruptedException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		}while(pollqueue == false);
+		}while((pollqueue == false)&&(timer>0));
 		
 		return frame;
 	}
