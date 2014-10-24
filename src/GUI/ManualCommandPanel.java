@@ -12,6 +12,8 @@ import data.Params;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ManualCommandPanel extends JFrame
 {
@@ -25,28 +27,27 @@ public class ManualCommandPanel extends JFrame
 	private JButton btnRight;
 	private JButton btnBackward;
 	private JButton btnStop;
-	
+
+	private static boolean isopen = false;
+
 	private enum Direction
 	{
-		forward,
-		backward,
-		left,
-		right,
-		stop
+		forward, backward, left, right, stop
 	}
 
 	public ManualCommandPanel()
 	{
+
 		setResizable(false);
 		setTitle("Manual Command");
 		setSize(244, 118);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{70, 70, 70, 0};
-		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 70, 70, 70, 0 };
+		gridBagLayout.rowHeights = new int[] { 23, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
-		
+
 		btnForward = new JButton("Forward");
 		btnForward.setSize(100, 30);
 		GridBagConstraints gbc_btnForward = new GridBagConstraints();
@@ -63,7 +64,7 @@ public class ManualCommandPanel extends JFrame
 		gbc_btnLeft.gridy = 1;
 		getContentPane().add(btnLeft, gbc_btnLeft);
 		btnStop = new JButton("Stop");
-		
+
 		GridBagConstraints gbc_btnStop = new GridBagConstraints();
 		gbc_btnStop.insets = new Insets(0, 0, 5, 5);
 		gbc_btnStop.gridx = 1;
@@ -83,70 +84,86 @@ public class ManualCommandPanel extends JFrame
 		gbc_btnBackward.gridx = 1;
 		gbc_btnBackward.gridy = 2;
 		getContentPane().add(btnBackward, gbc_btnBackward);
-		
-		
-		
-		
+
+		isopen = true;
+
 		btnForward.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnDirectionClick(e,Direction.forward);
+				btnDirectionClick(e, Direction.forward);
 			}
 		});
-		
+
 		btnBackward.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnDirectionClick(e,Direction.backward);
+				btnDirectionClick(e, Direction.backward);
 			}
 		});
-		
+
 		btnLeft.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnDirectionClick(e,Direction.left);
+				btnDirectionClick(e, Direction.left);
 			}
 		});
-		
+
 		btnRight.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnDirectionClick(e,Direction.right);
+				btnDirectionClick(e, Direction.right);
 			}
 		});
-		
+
 		btnStop.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnDirectionClick(e,Direction.stop);
+				btnDirectionClick(e, Direction.stop);
 			}
 		});
-		
-		
-		
+
+		addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosed(WindowEvent arg0)
+			{
+				whenwindowclosed(arg0);
+			}
+		});
+
 	}
 	
-	private void btnDirectionClick(ActionEvent e,Direction dir)
+	public static boolean isIsopen()
 	{
-		
+		return isopen;
+	}
+
+	private void whenwindowclosed(WindowEvent arg0)
+	{
+		isopen = false;
+	}
+
+	private void btnDirectionClick(ActionEvent e, Direction dir)
+	{
+
 		RPK RPK_out = new RPK();
 		RPK RPK_in = new RPK();
 		Params p = new Params();
-		RPK_in = RPK_out.Read(p.CommandReg.ParamID,p.CommandReg.Size);
+		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
 		p.CommandReg.SetParam(RPK_in.getData());
-		
+
 		p.CommandReg.MoveDuration = 3000;
-		switch(dir)
+		switch (dir)
 		{
 			case forward:
 				p.CommandReg.MoveDirection = 0;
@@ -165,9 +182,9 @@ public class ManualCommandPanel extends JFrame
 				p.CommandReg.MoveDirection = 0;
 				p.CommandReg.MoveDuration = 0;
 				break;
-				
+
 		}
-		RPK_out.Write(p.CommandReg.ParamID,p.CommandReg.Size,p.CommandReg.toBytes());
+		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
 
 	}
 }

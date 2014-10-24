@@ -733,7 +733,7 @@ public class ControlPanel extends JFrame
 		mntmAbout = new JMenuItem("About");
 
 		mnAbout.add(mntmAbout);
-		
+
 		lblNetStatus = new JLabel("Net Status");
 		lblNetStatus.setFont(new Font("Dialog", Font.PLAIN, 12));
 		menuBar.add(lblNetStatus);
@@ -831,20 +831,25 @@ public class ControlPanel extends JFrame
 		});
 
 	}
-	
+
 	private void it_ConnectClick(ActionEvent e)
 	{
 		Client.setConnect(true);
 	}
-	
+
 	private void it_DisconnectClick(ActionEvent e)
 	{
 		Client.setConnect(false);
 	}
+
 	private void it_ConnectionSettingClick(ActionEvent e)
 	{
-		NetworkConfig fen = new NetworkConfig();
-		fen.setVisible(true);
+		if (NetworkConfig.isIsopen() == false)
+		{
+			NetworkConfig fen = new NetworkConfig();
+			fen.setVisible(true);
+		}
+		
 	}
 
 	public void setLblNetStatus(String lblNetStatus)
@@ -864,9 +869,11 @@ public class ControlPanel extends JFrame
 
 	private void it_ManualCommandClick(ActionEvent e)
 	{
-		ManualCommandPanel fen = new ManualCommandPanel();
-
-		fen.setVisible(true);
+		if (ManualCommandPanel.isIsopen() == false)
+		{
+			ManualCommandPanel fen = new ManualCommandPanel();
+			fen.setVisible(true);
+		}
 	}
 
 	private void btnManualClick(ActionEvent e)
@@ -886,6 +893,25 @@ public class ControlPanel extends JFrame
 			p.CommandReg.Manual = 0;
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
+		try
+		{
+			Thread.sleep(200);
+		} catch (InterruptedException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		RPK_in = RPK_out.Read(p.StatusReg.ParamID, p.StatusReg.Size);
+		p.StatusReg.SetParam(RPK_in.getData());
+		
+		if(p.StatusReg.Manual == 1)
+		{
+			if (ManualCommandPanel.isIsopen() == false)
+			{
+				ManualCommandPanel fen = new ManualCommandPanel();
+				fen.setVisible(true);
+			}
+		}
 
 	}
 

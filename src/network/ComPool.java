@@ -100,6 +100,10 @@ public class ComPool
 			
 			size = in.read(data_in);
 			inQueue.add(new QueueElementIn(data_in, (short) size,fID));
+			if (inQueue.size()>5)
+			{
+				inQueue.clear();
+			}
 		}else
 		{
 			something_sent = false;
@@ -136,7 +140,10 @@ public class ComPool
 				}
 			}
 		}while((pollqueue == false)&&(timer>0));
-		
+		if(timer == 0)
+		{
+			System.out.println("timoutte " + fID);
+		}
 		return frame;
 	}
 

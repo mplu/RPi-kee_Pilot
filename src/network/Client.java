@@ -42,9 +42,13 @@ public class Client
 							do
 							{
 								// Send Request
-								ComPool.SendFrameNextRPK(out, in);
+								if(ComPool.SendFrameNextRPK(out, in)==false)
+								{
+									// make a short break only if nothing as been sent
+									Thread.sleep(100);
+								}
 
-								Thread.sleep(100);
+								
 
 							} while (connect == true);
 							connected = false;

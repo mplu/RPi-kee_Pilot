@@ -20,7 +20,7 @@ public class Startup
 		Params p = new Params();
 		
 		
-		Client.setIP_address("localhost");// 176.189.122.201 //localhost
+		Client.setIP_address("176.189.122.201");// 176.189.122.201 //localhost
 		Client.setConnection_port(6526);
 		Client.setConnect(false);
 		Client.startClient();

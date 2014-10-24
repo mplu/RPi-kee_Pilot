@@ -19,6 +19,8 @@ import network.Client;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class NetworkConfig extends JFrame
 {
@@ -29,6 +31,8 @@ public class NetworkConfig extends JFrame
 	private static final long serialVersionUID = 4746374842438477123L;
 	private JTextField txtLocalhost;
 	private JTextField txtPort;
+	
+	private static boolean isopen = false;
 
 	public NetworkConfig()
 	{
@@ -112,6 +116,25 @@ public class NetworkConfig extends JFrame
 				btnOkClick(e);
 			}
 		});
+		
+		addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosed(WindowEvent arg0)
+			{
+				whenwindowclosed(arg0);
+			}
+		});
+	}
+	
+	public static boolean isIsopen()
+	{
+		return isopen;
+	}
+
+	private void whenwindowclosed(WindowEvent arg0)
+	{
+		isopen = false;
 	}
 
 	private void btnCancelClick(ActionEvent e)
