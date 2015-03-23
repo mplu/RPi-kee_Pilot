@@ -12,10 +12,12 @@ import data.Params;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ManualCommandPanel extends JFrame
+public class ManualCommandPanel extends JFrame implements KeyListener
 {
 
 	/**
@@ -34,6 +36,8 @@ public class ManualCommandPanel extends JFrame
 	{
 		forward, backward, left, right, stop
 	}
+	
+	
 
 	public ManualCommandPanel()
 	{
@@ -41,6 +45,11 @@ public class ManualCommandPanel extends JFrame
 		setResizable(false);
 		setTitle("Manual Command");
 		setSize(244, 118);
+		
+		setFocusable(true);
+		addKeyListener(this);
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 70, 70, 70, 0 };
 		gridBagLayout.rowHeights = new int[] { 23, 0, 0, 0 };
@@ -140,7 +149,8 @@ public class ManualCommandPanel extends JFrame
 				whenwindowclosed(arg0);
 			}
 		});
-
+		
+		
 	}
 	
 	public static boolean isIsopen()
@@ -186,5 +196,65 @@ public class ManualCommandPanel extends JFrame
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
 
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0)
+	{
+		Integer touche = arg0.getKeyCode();
+		
+		if(touche == KeyEvent.VK_UP)
+		{
+			ActionEvent e = null;
+			btnDirectionClick(e, Direction.forward);
+			System.out.println("forward");
+		}
+		if(touche == KeyEvent.VK_DOWN)
+		{
+			ActionEvent e = null;
+			btnDirectionClick(e, Direction.backward);
+			System.out.println("backward");
+		}
+		if(touche == KeyEvent.VK_RIGHT)
+		{
+			ActionEvent e = null;
+			btnDirectionClick(e, Direction.right);
+			System.out.println("right");
+		}
+		if(touche == KeyEvent.VK_LEFT)
+		{
+			ActionEvent e = null;
+			btnDirectionClick(e, Direction.left);
+			System.out.println("left");
+		}
+		try
+		{
+			Thread.sleep(500);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0)
+	{
+		Integer touche = arg0.getKeyCode();
+		if((touche == KeyEvent.VK_UP)
+				||(touche == KeyEvent.VK_DOWN)
+				||(touche == KeyEvent.VK_RIGHT)
+				||(touche == KeyEvent.VK_LEFT))
+		{
+			ActionEvent e = null;
+			btnDirectionClick(e, Direction.stop);
+			System.out.println("stop");
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0)
+	{
+		Integer touche = arg0.getKeyCode();
+		System.out.println(touche.toString()+ " Typed");
 	}
 }

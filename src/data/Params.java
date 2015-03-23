@@ -128,87 +128,96 @@ public class Params
 	public class t_COMMAND_REG
 	{
 		public byte Manual;
-		public byte Auto;
+		public byte LineFollow;
+		public byte Survey;
+		public byte UDPLiveFeed;
+		public byte MovementMotorEnable;
+		public byte TurretMotorEnable;
 		public short MoveDirection;
 		public short MoveDuration;
-		public byte UDPLiveFeed;
-		public byte MotorPSEnable;
 		public int ParamID;
 		public int Size;
 
 		public t_COMMAND_REG(int pid)
 		{
 			ParamID = pid;
-			Size = (Short.SIZE * 2 + Byte.SIZE * 4) / 8;
+			Size = (Short.SIZE * 2 + Byte.SIZE * 6) / 8;
 		}
 		public byte[] toBytes()
 		{
 			byte data[] = new byte[Size];
 			data[0] = (byte) (0xFF & Manual);
-			data[1] = (byte) (0xFF & Auto);
-			data[2] = (byte) (0xFF & MoveDirection);
-			data[3] = (byte) ((0xFF00 & MoveDirection) >> 8);
-			data[4] = (byte) (0xFF & MoveDuration);
-			data[5] = (byte) ((0xFF00 & MoveDuration) >> 8);
-			data[6] = (byte)  (0xFF & UDPLiveFeed);
-			data[7] = (byte)  (0xFF & MotorPSEnable);
+			data[1] = (byte) (0xFF & LineFollow);
+			data[2] = (byte) (0xFF & Survey);
+			data[3] = (byte) (0xFF & UDPLiveFeed);
+			data[4] = (byte) (0xFF & MovementMotorEnable);
+			data[5] = (byte) (0xFF & TurretMotorEnable);
+			data[7] = (byte) ((0xFF00 & MoveDirection) >> 8);
+			data[6] = (byte) (0xFF & MoveDirection);
+			data[9] = (byte) ((0xFF00 & MoveDuration) >> 8);
+			data[8] = (byte) (0xFF & MoveDuration);
+
 			return data;
 		}
 
 		public void SetParam(byte data[])
 		{
-			Manual = data[0]; 
-			Auto = data[1];
-			MoveDirection = CombineBytes(data[2], data[3]);
-			MoveDuration = CombineBytes(data[4], data[5]);
-			UDPLiveFeed = data[6]; 
-			MotorPSEnable = data[7]; 
-			
-			
+			Manual 		= data[0]; 
+			LineFollow 	= data[1];
+			Survey 		= data[2]; 
+			UDPLiveFeed	= data[3];
+			MovementMotorEnable = data[4]; 
+			TurretMotorEnable	= data[5]; 
+			MoveDirection 		= CombineBytes(data[6], data[7]);
+			MoveDuration  		= CombineBytes(data[8], data[9]);
 		}
 	};
 
 	public class t_STATUS_REG
 	{
 		public byte Manual;
-		public byte Auto;
+		public byte LineFollow;
+		public byte Survey;
+		public byte UDPLiveFeed;
+		public byte MovementMotorEnable;
+		public byte TurretMotorEnable;
 		public short MoveDirection;
 		public short MoveDuration;
-		public byte UDPLiveFeed;
-		public byte MotorPSEnable;
 		public int ParamID;
 		public int Size;
 
 		public t_STATUS_REG(int pid)
 		{
 			ParamID = pid;
-			Size = (Short.SIZE * 2 + Byte.SIZE * 4) / 8;
-
+			Size = (Short.SIZE * 2 + Byte.SIZE * 6) / 8;
 		}
 		public byte[] toBytes()
 		{
 			byte data[] = new byte[Size];
 			data[0] = (byte) (0xFF & Manual);
-			data[1] = (byte) (0xFF & Auto);
-			data[2] = (byte) (0xFF & MoveDirection);
-			data[3] = (byte) ((0xFF00 & MoveDirection) >> 8);
-			data[4] = (byte) (0xFF & MoveDuration);
-			data[5] = (byte) ((0xFF00 & MoveDuration) >> 8);
-			data[6] = (byte)  (0xFF & UDPLiveFeed);
-			data[7] = (byte)  (0xFF & MotorPSEnable);
+			data[1] = (byte) (0xFF & LineFollow);
+			data[2] = (byte) (0xFF & Survey);
+			data[3] = (byte) (0xFF & UDPLiveFeed);
+			data[4] = (byte) (0xFF & MovementMotorEnable);
+			data[5] = (byte) (0xFF & TurretMotorEnable);
+			data[7] = (byte) ((0xFF00 & MoveDirection) >> 8);
+			data[6] = (byte) (0xFF & MoveDirection);
+			data[9] = (byte) ((0xFF00 & MoveDuration) >> 8);
+			data[8] = (byte) (0xFF & MoveDuration);
+
 			return data;
 		}
 
 		public void SetParam(byte data[])
 		{
-			Manual = data[0]; 
-			Auto = data[1];
-			MoveDirection = CombineBytes(data[2], data[3]);
-			MoveDuration = CombineBytes(data[4], data[5]);
-			UDPLiveFeed = data[6]; 
-			MotorPSEnable = data[7]; 
-			
-			
+			Manual 		= data[0]; 
+			LineFollow 	= data[1];
+			Survey 		= data[2]; 
+			UDPLiveFeed	= data[3];
+			MovementMotorEnable = data[4]; 
+			TurretMotorEnable	= data[5]; 
+			MoveDirection 		= CombineBytes(data[6], data[7]);
+			MoveDuration  		= CombineBytes(data[8], data[9]);
 		}
 
 	};

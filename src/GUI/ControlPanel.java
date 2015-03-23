@@ -69,31 +69,40 @@ public class ControlPanel extends JFrame
 
 	// CommandReg
 	private JLabel CManual;
-	private JLabel CAuto;
+	private JLabel CLineFollow;
+	private JLabel CSurvey;
+	private JLabel CUDPLiveFeed;
+	private JLabel CMovementMotorEnable;
+	private JLabel CTurretMotorEnable;
 	private JLabel CMoveDirection;
 	private JLabel CMoveDuration;
-	private JLabel CUDPLiveFeed;
-	private JLabel CMotorPSEnable;
 	private JLabel CManual_val;
-	private JLabel CAuto_val;
+	private JLabel CLineFollow_val;
+	private JLabel CSurvey_val;
+	private JLabel CUDPLiveFeed_val;
+	private JLabel CMovementMotorEnable_val;
+	private JLabel CTurretMotorEnable_val;
 	private JLabel CMoveDirection_val;
 	private JLabel CMoveDuration_val;
-	private JLabel CUDPLiveFeed_val;
-	private JLabel CMotorPSEnable_val;
+
 
 	// StatusReg
 	private JLabel SManual;
-	private JLabel SAuto;
+	private JLabel SLineFollow;
+	private JLabel SSurvey;
+	private JLabel SUDPLiveFeed;
+	private JLabel SMovementMotorEnable;
+	private JLabel STurretMotorEnable;
 	private JLabel SMoveDirection;
 	private JLabel SMoveDuration;
-	private JLabel SUDPLiveFeed;
-	private JLabel SMotorPSEnable;
 	private JLabel SManual_val;
-	private JLabel SAuto_val;
+	private JLabel SLineFollow_val;
+	private JLabel SSurvey_val;
+	private JLabel SUDPLiveFeed_val;
+	private JLabel SMovementMotorEnable_val;
+	private JLabel STurretMotorEnable_val;
 	private JLabel SMoveDirection_val;
 	private JLabel SMoveDuration_val;
-	private JLabel SUDPLiveFeed_val;
-	private JLabel SMotorPSEnable_val;
 
 	// FailureReg
 	private JLabel FRglobal1;
@@ -101,9 +110,9 @@ public class ControlPanel extends JFrame
 
 	// Bouton
 	private JButton btnManual;
-	private JButton btnAuto;
+	private JButton btnLineFollow;
 	private JButton btnUDPLiveFeed;
-	private JButton btnMotorPSEnable;
+	private JButton btnMovementMotorEnable;
 
 	private JPanel panel_Info;
 	private JPanel panel_Analog_Values;
@@ -138,11 +147,14 @@ public class ControlPanel extends JFrame
 	private JSeparator mntmSep1;
 	private JSeparator mntmSep2;
 	private JLabel lblNetStatus;
+	private JButton btnTurretMotorEnable;
+	private JButton btnSurvey;
+	private JPanel panel;
 
 	public ControlPanel()
 	{
 		setTitle("R-Pikee Pilot");
-		setSize(407, 476);
+		setSize(628, 574);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		main_panel = new JPanel();
@@ -470,79 +482,109 @@ public class ControlPanel extends JFrame
 		gbc_CManual_val.gridy = 1;
 		panel_CommandReg.add(CManual_val, gbc_CManual_val);
 
-		CAuto = new JLabel("Auto");
+		CLineFollow = new JLabel("LineFollow");
 		GridBagConstraints gbc_CAuto = new GridBagConstraints();
 		gbc_CAuto.anchor = GridBagConstraints.NORTHWEST;
 		gbc_CAuto.insets = new Insets(0, 0, 5, 5);
 		gbc_CAuto.gridx = 0;
 		gbc_CAuto.gridy = 2;
-		panel_CommandReg.add(CAuto, gbc_CAuto);
-		CAuto_val = new JLabel("0");
+		panel_CommandReg.add(CLineFollow, gbc_CAuto);
+		CLineFollow_val = new JLabel("0");
 		GridBagConstraints gbc_CAuto_val = new GridBagConstraints();
 		gbc_CAuto_val.anchor = GridBagConstraints.NORTHWEST;
 		gbc_CAuto_val.insets = new Insets(0, 0, 5, 0);
 		gbc_CAuto_val.gridx = 1;
 		gbc_CAuto_val.gridy = 2;
-		panel_CommandReg.add(CAuto_val, gbc_CAuto_val);
-
-		CMoveDirection = new JLabel("MoveDirection");
-		GridBagConstraints gbc_CMoveDirection = new GridBagConstraints();
-		gbc_CMoveDirection.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMoveDirection.insets = new Insets(0, 0, 5, 5);
-		gbc_CMoveDirection.gridx = 0;
-		gbc_CMoveDirection.gridy = 3;
-		panel_CommandReg.add(CMoveDirection, gbc_CMoveDirection);
-		CMoveDirection_val = new JLabel("0");
-		GridBagConstraints gbc_CMoveDirection_val = new GridBagConstraints();
-		gbc_CMoveDirection_val.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMoveDirection_val.insets = new Insets(0, 0, 5, 0);
-		gbc_CMoveDirection_val.gridx = 1;
-		gbc_CMoveDirection_val.gridy = 3;
-		panel_CommandReg.add(CMoveDirection_val, gbc_CMoveDirection_val);
-
-		CMoveDuration = new JLabel("MoveDuration");
-		GridBagConstraints gbc_CMoveDuration = new GridBagConstraints();
-		gbc_CMoveDuration.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMoveDuration.insets = new Insets(0, 0, 5, 5);
-		gbc_CMoveDuration.gridx = 0;
-		gbc_CMoveDuration.gridy = 4;
-		panel_CommandReg.add(CMoveDuration, gbc_CMoveDuration);
-		CMoveDuration_val = new JLabel("0");
-		GridBagConstraints gbc_CMoveDuration_val = new GridBagConstraints();
-		gbc_CMoveDuration_val.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMoveDuration_val.insets = new Insets(0, 0, 5, 0);
-		gbc_CMoveDuration_val.gridx = 1;
-		gbc_CMoveDuration_val.gridy = 4;
-		panel_CommandReg.add(CMoveDuration_val, gbc_CMoveDuration_val);
-
+		panel_CommandReg.add(CLineFollow_val, gbc_CAuto_val);
+	
+		CSurvey = new JLabel("Survey");
+		GridBagConstraints gbc_CSurvey = new GridBagConstraints();
+		gbc_CSurvey.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CSurvey.insets = new Insets(0, 0, 5, 5);
+		gbc_CSurvey.gridx = 0;
+		gbc_CSurvey.gridy = 3;
+		panel_CommandReg.add(CSurvey, gbc_CSurvey);
+		CSurvey_val = new JLabel("0");
+		GridBagConstraints gbc_CSurvey_val = new GridBagConstraints();
+		gbc_CSurvey_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CSurvey_val.insets = new Insets(0, 0, 5, 0);
+		gbc_CSurvey_val.gridx = 1;
+		gbc_CSurvey_val.gridy = 3;
+		panel_CommandReg.add(CSurvey_val, gbc_CSurvey_val);
+		
 		CUDPLiveFeed = new JLabel("UDPLiveFeed");
 		GridBagConstraints gbc_CUDPLiveFeed = new GridBagConstraints();
 		gbc_CUDPLiveFeed.anchor = GridBagConstraints.NORTHWEST;
 		gbc_CUDPLiveFeed.insets = new Insets(0, 0, 5, 5);
 		gbc_CUDPLiveFeed.gridx = 0;
-		gbc_CUDPLiveFeed.gridy = 5;
+		gbc_CUDPLiveFeed.gridy = 4;
 		panel_CommandReg.add(CUDPLiveFeed, gbc_CUDPLiveFeed);
 		CUDPLiveFeed_val = new JLabel("0");
 		GridBagConstraints gbc_CUDPLiveFeed_val = new GridBagConstraints();
 		gbc_CUDPLiveFeed_val.anchor = GridBagConstraints.NORTHWEST;
 		gbc_CUDPLiveFeed_val.insets = new Insets(0, 0, 5, 0);
 		gbc_CUDPLiveFeed_val.gridx = 1;
-		gbc_CUDPLiveFeed_val.gridy = 5;
+		gbc_CUDPLiveFeed_val.gridy = 4;
 		panel_CommandReg.add(CUDPLiveFeed_val, gbc_CUDPLiveFeed_val);
 
-		CMotorPSEnable = new JLabel("MotorPSEnable");
-		GridBagConstraints gbc_CMotorPSEnable = new GridBagConstraints();
-		gbc_CMotorPSEnable.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMotorPSEnable.insets = new Insets(0, 0, 0, 5);
-		gbc_CMotorPSEnable.gridx = 0;
-		gbc_CMotorPSEnable.gridy = 6;
-		panel_CommandReg.add(CMotorPSEnable, gbc_CMotorPSEnable);
-		CMotorPSEnable_val = new JLabel("0");
-		GridBagConstraints gbc_CMotorPSEnable_val = new GridBagConstraints();
-		gbc_CMotorPSEnable_val.anchor = GridBagConstraints.NORTHWEST;
-		gbc_CMotorPSEnable_val.gridx = 1;
-		gbc_CMotorPSEnable_val.gridy = 6;
-		panel_CommandReg.add(CMotorPSEnable_val, gbc_CMotorPSEnable_val);
+		CMovementMotorEnable = new JLabel("MovementMotorEnable");
+		GridBagConstraints gbc_CMovementMotorEnable = new GridBagConstraints();
+		gbc_CMovementMotorEnable.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMovementMotorEnable.insets = new Insets(0, 0, 5, 5);
+		gbc_CMovementMotorEnable.gridx = 0;
+		gbc_CMovementMotorEnable.gridy = 5;
+		panel_CommandReg.add(CMovementMotorEnable, gbc_CMovementMotorEnable);
+		CMovementMotorEnable_val = new JLabel("0");
+		GridBagConstraints gbc_CMovementMotorEnable_val = new GridBagConstraints();
+		gbc_CMovementMotorEnable_val.insets = new Insets(0, 0, 5, 0);
+		gbc_CMovementMotorEnable_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMovementMotorEnable_val.gridx = 1;
+		gbc_CMovementMotorEnable_val.gridy = 5;
+		panel_CommandReg.add(CMovementMotorEnable_val, gbc_CMovementMotorEnable_val);
+		
+		CTurretMotorEnable = new JLabel("TurretMotorEnable");
+		GridBagConstraints gbc_CTurretMotorEnable = new GridBagConstraints();
+		gbc_CTurretMotorEnable.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CTurretMotorEnable.insets = new Insets(0, 0, 5, 5);
+		gbc_CTurretMotorEnable.gridx = 0;
+		gbc_CTurretMotorEnable.gridy = 6;
+		panel_CommandReg.add(CTurretMotorEnable, gbc_CTurretMotorEnable);
+		CTurretMotorEnable_val = new JLabel("0");
+		GridBagConstraints gbc_CTurretMotorEnable_val = new GridBagConstraints();
+		gbc_CTurretMotorEnable_val.insets = new Insets(0, 0, 5, 0);
+		gbc_CTurretMotorEnable_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CTurretMotorEnable_val.gridx = 1;
+		gbc_CTurretMotorEnable_val.gridy = 6;
+		panel_CommandReg.add(CTurretMotorEnable_val, gbc_CTurretMotorEnable_val);
+
+		CMoveDirection = new JLabel("MoveDirection");
+		GridBagConstraints gbc_CMoveDirection = new GridBagConstraints();
+		gbc_CMoveDirection.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMoveDirection.insets = new Insets(0, 0, 5, 5);
+		gbc_CMoveDirection.gridx = 0;
+		gbc_CMoveDirection.gridy = 7;
+		panel_CommandReg.add(CMoveDirection, gbc_CMoveDirection);
+		CMoveDirection_val = new JLabel("0");
+		GridBagConstraints gbc_CMoveDirection_val = new GridBagConstraints();
+		gbc_CMoveDirection_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMoveDirection_val.insets = new Insets(0, 0, 5, 0);
+		gbc_CMoveDirection_val.gridx = 1;
+		gbc_CMoveDirection_val.gridy = 7;
+		panel_CommandReg.add(CMoveDirection_val, gbc_CMoveDirection_val);
+
+		CMoveDuration = new JLabel("MoveDuration");
+		GridBagConstraints gbc_CMoveDuration = new GridBagConstraints();
+		gbc_CMoveDuration.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMoveDuration.insets = new Insets(0, 0, 0, 5);
+		gbc_CMoveDuration.gridx = 0;
+		gbc_CMoveDuration.gridy = 8;
+		panel_CommandReg.add(CMoveDuration, gbc_CMoveDuration);
+		CMoveDuration_val = new JLabel("0");
+		GridBagConstraints gbc_CMoveDuration_val = new GridBagConstraints();
+		gbc_CMoveDuration_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_CMoveDuration_val.gridx = 1;
+		gbc_CMoveDuration_val.gridy = 8;
+		panel_CommandReg.add(CMoveDuration_val, gbc_CMoveDuration_val);
 
 		panel_StatusReg = new JPanel();
 		panel_StatusReg.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -578,79 +620,109 @@ public class ControlPanel extends JFrame
 		gbc_SManual_val.gridy = 1;
 		panel_StatusReg.add(SManual_val, gbc_SManual_val);
 
-		SAuto = new JLabel("Auto");
+		SLineFollow = new JLabel("LineFollow");
 		GridBagConstraints gbc_SAuto = new GridBagConstraints();
 		gbc_SAuto.anchor = GridBagConstraints.NORTHWEST;
 		gbc_SAuto.insets = new Insets(0, 0, 5, 5);
 		gbc_SAuto.gridx = 0;
 		gbc_SAuto.gridy = 2;
-		panel_StatusReg.add(SAuto, gbc_SAuto);
-		SAuto_val = new JLabel("0");
+		panel_StatusReg.add(SLineFollow, gbc_SAuto);
+		SLineFollow_val = new JLabel("0");
 		GridBagConstraints gbc_SAuto_val = new GridBagConstraints();
 		gbc_SAuto_val.anchor = GridBagConstraints.NORTHWEST;
 		gbc_SAuto_val.insets = new Insets(0, 0, 5, 0);
 		gbc_SAuto_val.gridx = 1;
 		gbc_SAuto_val.gridy = 2;
-		panel_StatusReg.add(SAuto_val, gbc_SAuto_val);
-
-		SMoveDirection = new JLabel("MoveDirection");
-		GridBagConstraints gbc_SMoveDirection = new GridBagConstraints();
-		gbc_SMoveDirection.anchor = GridBagConstraints.NORTHWEST;
-		gbc_SMoveDirection.insets = new Insets(0, 0, 5, 5);
-		gbc_SMoveDirection.gridx = 0;
-		gbc_SMoveDirection.gridy = 3;
-		panel_StatusReg.add(SMoveDirection, gbc_SMoveDirection);
-		SMoveDirection_val = new JLabel("0");
-		GridBagConstraints gbc_SMoveDirection_val = new GridBagConstraints();
-		gbc_SMoveDirection_val.anchor = GridBagConstraints.NORTHWEST;
-		gbc_SMoveDirection_val.insets = new Insets(0, 0, 5, 0);
-		gbc_SMoveDirection_val.gridx = 1;
-		gbc_SMoveDirection_val.gridy = 3;
-		panel_StatusReg.add(SMoveDirection_val, gbc_SMoveDirection_val);
-
-		SMoveDuration = new JLabel("MoveDuration");
-		GridBagConstraints gbc_SMoveDuration = new GridBagConstraints();
-		gbc_SMoveDuration.anchor = GridBagConstraints.NORTHWEST;
-		gbc_SMoveDuration.insets = new Insets(0, 0, 5, 5);
-		gbc_SMoveDuration.gridx = 0;
-		gbc_SMoveDuration.gridy = 4;
-		panel_StatusReg.add(SMoveDuration, gbc_SMoveDuration);
-		SMoveDuration_val = new JLabel("0");
-		GridBagConstraints gbc_SMoveDuration_val = new GridBagConstraints();
-		gbc_SMoveDuration_val.anchor = GridBagConstraints.NORTHWEST;
-		gbc_SMoveDuration_val.insets = new Insets(0, 0, 5, 0);
-		gbc_SMoveDuration_val.gridx = 1;
-		gbc_SMoveDuration_val.gridy = 4;
-		panel_StatusReg.add(SMoveDuration_val, gbc_SMoveDuration_val);
-
+		panel_StatusReg.add(SLineFollow_val, gbc_SAuto_val);
+		
+		SSurvey = new JLabel("Survey");
+		GridBagConstraints gbc_SSurvey = new GridBagConstraints();
+		gbc_SSurvey.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SSurvey.insets = new Insets(0, 0, 5, 5);
+		gbc_SSurvey.gridx = 0;
+		gbc_SSurvey.gridy = 3;
+		panel_StatusReg.add(SSurvey, gbc_SSurvey);
+		SSurvey_val = new JLabel("0");
+		GridBagConstraints gbc_SSurvey_val = new GridBagConstraints();
+		gbc_SSurvey_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SSurvey_val.insets = new Insets(0, 0, 5, 0);
+		gbc_SSurvey_val.gridx = 1;
+		gbc_SSurvey_val.gridy = 3;
+		panel_StatusReg.add(SSurvey_val, gbc_SSurvey_val);
+		
 		SUDPLiveFeed = new JLabel("UDPLiveFeed");
 		GridBagConstraints gbc_SUDPLiveFeed = new GridBagConstraints();
 		gbc_SUDPLiveFeed.anchor = GridBagConstraints.NORTHWEST;
 		gbc_SUDPLiveFeed.insets = new Insets(0, 0, 5, 5);
 		gbc_SUDPLiveFeed.gridx = 0;
-		gbc_SUDPLiveFeed.gridy = 5;
+		gbc_SUDPLiveFeed.gridy = 4;
 		panel_StatusReg.add(SUDPLiveFeed, gbc_SUDPLiveFeed);
 		SUDPLiveFeed_val = new JLabel("0");
 		GridBagConstraints gbc_SUDPLiveFeed_val = new GridBagConstraints();
 		gbc_SUDPLiveFeed_val.anchor = GridBagConstraints.NORTHWEST;
 		gbc_SUDPLiveFeed_val.insets = new Insets(0, 0, 5, 0);
 		gbc_SUDPLiveFeed_val.gridx = 1;
-		gbc_SUDPLiveFeed_val.gridy = 5;
+		gbc_SUDPLiveFeed_val.gridy = 4;
 		panel_StatusReg.add(SUDPLiveFeed_val, gbc_SUDPLiveFeed_val);
 
-		SMotorPSEnable = new JLabel("MotorPSEnable");
+		SMovementMotorEnable = new JLabel("MovementMotorEnable");
 		GridBagConstraints gbc_SMotorPSEnable = new GridBagConstraints();
 		gbc_SMotorPSEnable.anchor = GridBagConstraints.NORTHWEST;
-		gbc_SMotorPSEnable.insets = new Insets(0, 0, 0, 5);
+		gbc_SMotorPSEnable.insets = new Insets(0, 0, 5, 5);
 		gbc_SMotorPSEnable.gridx = 0;
-		gbc_SMotorPSEnable.gridy = 6;
-		panel_StatusReg.add(SMotorPSEnable, gbc_SMotorPSEnable);
-		SMotorPSEnable_val = new JLabel("0");
+		gbc_SMotorPSEnable.gridy = 5;
+		panel_StatusReg.add(SMovementMotorEnable, gbc_SMotorPSEnable);
+		SMovementMotorEnable_val = new JLabel("0");
 		GridBagConstraints gbc_SMotorPSEnable_val = new GridBagConstraints();
+		gbc_SMotorPSEnable_val.insets = new Insets(0, 0, 5, 0);
 		gbc_SMotorPSEnable_val.anchor = GridBagConstraints.NORTHWEST;
 		gbc_SMotorPSEnable_val.gridx = 1;
-		gbc_SMotorPSEnable_val.gridy = 6;
-		panel_StatusReg.add(SMotorPSEnable_val, gbc_SMotorPSEnable_val);
+		gbc_SMotorPSEnable_val.gridy = 5;
+		panel_StatusReg.add(SMovementMotorEnable_val, gbc_SMotorPSEnable_val);
+		
+		STurretMotorEnable = new JLabel("TurretMotorEnable");
+		GridBagConstraints gbc_STurretMotorEnable = new GridBagConstraints();
+		gbc_STurretMotorEnable.anchor = GridBagConstraints.NORTHWEST;
+		gbc_STurretMotorEnable.insets = new Insets(0, 0, 5, 5);
+		gbc_STurretMotorEnable.gridx = 0;
+		gbc_STurretMotorEnable.gridy = 6;
+		panel_StatusReg.add(STurretMotorEnable, gbc_STurretMotorEnable);
+		STurretMotorEnable_val = new JLabel("0");
+		GridBagConstraints gbc_STurretMotorEnable_val = new GridBagConstraints();
+		gbc_STurretMotorEnable_val.insets = new Insets(0, 0, 5, 0);
+		gbc_STurretMotorEnable_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_STurretMotorEnable_val.gridx = 1;
+		gbc_STurretMotorEnable_val.gridy = 6;
+		panel_StatusReg.add(STurretMotorEnable_val, gbc_STurretMotorEnable_val);
+
+		SMoveDirection = new JLabel("MoveDirection");
+		GridBagConstraints gbc_SMoveDirection = new GridBagConstraints();
+		gbc_SMoveDirection.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SMoveDirection.insets = new Insets(0, 0, 5, 5);
+		gbc_SMoveDirection.gridx = 0;
+		gbc_SMoveDirection.gridy = 7;
+		panel_StatusReg.add(SMoveDirection, gbc_SMoveDirection);
+		SMoveDirection_val = new JLabel("0");
+		GridBagConstraints gbc_SMoveDirection_val = new GridBagConstraints();
+		gbc_SMoveDirection_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SMoveDirection_val.insets = new Insets(0, 0, 5, 0);
+		gbc_SMoveDirection_val.gridx = 1;
+		gbc_SMoveDirection_val.gridy = 7;
+		panel_StatusReg.add(SMoveDirection_val, gbc_SMoveDirection_val);
+
+		SMoveDuration = new JLabel("MoveDuration");
+		GridBagConstraints gbc_SMoveDuration = new GridBagConstraints();
+		gbc_SMoveDuration.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SMoveDuration.insets = new Insets(0, 0, 0, 5);
+		gbc_SMoveDuration.gridx = 0;
+		gbc_SMoveDuration.gridy = 8;
+		panel_StatusReg.add(SMoveDuration, gbc_SMoveDuration);
+		SMoveDuration_val = new JLabel("0");
+		GridBagConstraints gbc_SMoveDuration_val = new GridBagConstraints();
+		gbc_SMoveDuration_val.anchor = GridBagConstraints.NORTHWEST;
+		gbc_SMoveDuration_val.gridx = 1;
+		gbc_SMoveDuration_val.gridy = 8;
+		panel_StatusReg.add(SMoveDuration_val, gbc_SMoveDuration_val);
 
 		panel_FailureReg = new JPanel();
 		panel_FailureReg.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -682,16 +754,47 @@ public class ControlPanel extends JFrame
 		panel_button.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		main_panel.add(panel_button);
 		btnManual = new JButton("Manual");
-		btnAuto = new JButton("Auto");
+		btnLineFollow = new JButton("LineFollow");
 		btnUDPLiveFeed = new JButton("LiveFeed");
-		btnMotorPSEnable = new JButton("MotorPSEnable");
 		panel_button.add(btnManual);
-		panel_button.add(btnAuto);
+		panel_button.add(btnLineFollow);
+		
+		btnSurvey = new JButton("Survey");
+		panel_button.add(btnSurvey);
 		panel_button.add(btnUDPLiveFeed);
-		panel_button.add(btnMotorPSEnable);
 
 		// ajout du panel à la fenetre
 		getContentPane().add(main_panel);
+		
+		panel = new JPanel();
+		panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		main_panel.add(panel);
+		
+		
+		btnMovementMotorEnable = new JButton("MovementMotorEnable");
+		panel.add(btnMovementMotorEnable);
+		btnMovementMotorEnable.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				btnMovementMotorEnableClick(e);
+
+			}
+		});
+		
+		btnTurretMotorEnable = new JButton("TurretMotorEnable");
+		panel.add(btnTurretMotorEnable);
+		btnTurretMotorEnable.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				btnTurretMotorEnableClick(e);
+
+			}
+		});
+
 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -747,12 +850,12 @@ public class ControlPanel extends JFrame
 
 			}
 		});
-		btnAuto.addActionListener(new ActionListener()
+		btnLineFollow.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnAutoClick(e);
+				btnLineFollowClick(e);
 
 			}
 		});
@@ -765,12 +868,13 @@ public class ControlPanel extends JFrame
 
 			}
 		});
-		btnMotorPSEnable.addActionListener(new ActionListener()
+		
+		btnSurvey.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				btnMotorPSEnableClick(e);
+				btnSurveyClick(e);
 
 			}
 		});
@@ -864,7 +968,7 @@ public class ControlPanel extends JFrame
 
 	private void it_AboutClick(ActionEvent e)
 	{
-		JOptionPane.showMessageDialog(this, "RPi-kee Pilot v0.01 , a JAVA Gui by MPE", "About", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "RPi-kee Pilot v0.02 , a JAVA Gui by MPE", "About", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private void it_ManualCommandClick(ActionEvent e)
@@ -893,12 +997,11 @@ public class ControlPanel extends JFrame
 			p.CommandReg.Manual = 0;
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
-		try
+		/*try
 		{
 			Thread.sleep(200);
 		} catch (InterruptedException e1)
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		RPK_in = RPK_out.Read(p.StatusReg.ParamID, p.StatusReg.Size);
@@ -911,11 +1014,11 @@ public class ControlPanel extends JFrame
 				ManualCommandPanel fen = new ManualCommandPanel();
 				fen.setVisible(true);
 			}
-		}
+		}*/
 
 	}
 
-	private void btnAutoClick(ActionEvent e)
+	private void btnLineFollowClick(ActionEvent e)
 	{
 		RPK RPK_out = new RPK();
 		RPK RPK_in = new RPK();
@@ -923,12 +1026,12 @@ public class ControlPanel extends JFrame
 		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
 		p.CommandReg.SetParam(RPK_in.getData());
 
-		if (p.CommandReg.Auto == 0)
+		if (p.CommandReg.LineFollow == 0)
 		{
-			p.CommandReg.Auto = 1;
+			p.CommandReg.LineFollow = 1;
 		} else
 		{
-			p.CommandReg.Auto = 0;
+			p.CommandReg.LineFollow = 0;
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
 	}
@@ -950,8 +1053,8 @@ public class ControlPanel extends JFrame
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
 	}
-
-	private void btnMotorPSEnableClick(ActionEvent e)
+	
+	private void btnSurveyClick(ActionEvent e)
 	{
 		RPK RPK_out = new RPK();
 		RPK RPK_in = new RPK();
@@ -959,12 +1062,49 @@ public class ControlPanel extends JFrame
 		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
 		p.CommandReg.SetParam(RPK_in.getData());
 
-		if (p.CommandReg.MotorPSEnable == 0)
+		if (p.CommandReg.Survey == 0)
 		{
-			p.CommandReg.MotorPSEnable = 1;
+			p.CommandReg.Survey = 1;
 		} else
 		{
-			p.CommandReg.MotorPSEnable = 0;
+			p.CommandReg.Survey = 0;
+		}
+		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
+	}
+
+	private void btnMovementMotorEnableClick(ActionEvent e)
+	{
+		RPK RPK_out = new RPK();
+		RPK RPK_in = new RPK();
+		Params p = new Params();
+		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
+		p.CommandReg.SetParam(RPK_in.getData());
+
+		if (p.CommandReg.MovementMotorEnable == 0)
+		{
+			p.CommandReg.MovementMotorEnable = 1;
+		} else
+		{
+			p.CommandReg.MovementMotorEnable = 0;
+		}
+		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
+	}
+	
+	
+	private void btnTurretMotorEnableClick(ActionEvent e)
+	{
+		RPK RPK_out = new RPK();
+		RPK RPK_in = new RPK();
+		Params p = new Params();
+		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
+		p.CommandReg.SetParam(RPK_in.getData());
+
+		if (p.CommandReg.TurretMotorEnable == 0)
+		{
+			p.CommandReg.TurretMotorEnable = 1;
+		} else
+		{
+			p.CommandReg.TurretMotorEnable = 0;
 		}
 		RPK_out.Write(p.CommandReg.ParamID, p.CommandReg.Size, p.CommandReg.toBytes());
 	}
@@ -1039,9 +1179,14 @@ public class ControlPanel extends JFrame
 		CManual_val.setText(cManual_val);
 	}
 
-	public void setCAuto_val(String cAuto_val)
+	public void setCLineFollow_val(String cLineFollow_val)
 	{
-		CAuto_val.setText(cAuto_val);
+		CLineFollow_val.setText(cLineFollow_val);
+	}
+	
+	public void setCSurvey_val(String cSurvey_val)
+	{
+		CSurvey_val.setText(cSurvey_val);
 	}
 
 	public void setCMoveDirection_val(String cMoveDirection_val)
@@ -1059,9 +1204,20 @@ public class ControlPanel extends JFrame
 		CUDPLiveFeed_val.setText(cUDPLiveFeed_val);
 	}
 
-	public void setCMotorPSEnable_val(String cMotorPSEnable_val)
+	public void setCMovementMotorEnable_val(String cMovementMotorEnable_val)
 	{
-		CMotorPSEnable_val.setText(cMotorPSEnable_val);
+		CMovementMotorEnable_val.setText(cMovementMotorEnable_val);
+	}
+	
+	
+	public void setSTurretMotorEnable_val(String sTurretMotorEnable_val)
+	{
+		STurretMotorEnable_val.setText(sTurretMotorEnable_val);
+	}
+	
+	public void setCTurretMotorEnable_val(String cTurretMotorEnable_val)
+	{
+		CTurretMotorEnable_val.setText(cTurretMotorEnable_val);
 	}
 
 	public void setSManual_val(String sManual_val)
@@ -1069,9 +1225,14 @@ public class ControlPanel extends JFrame
 		SManual_val.setText(sManual_val);
 	}
 
-	public void setSAuto_val(String sAuto_val)
+	public void setSLineFollow_val(String sLineFollow_val)
 	{
-		SAuto_val.setText(sAuto_val);
+		SLineFollow_val.setText(sLineFollow_val);
+	}
+	
+	public void setSSurvey_val(String sSurvey_val)
+	{
+		SSurvey_val.setText(sSurvey_val);
 	}
 
 	public void setSMoveDirection_val(String sMoveDirection_val)
@@ -1091,7 +1252,7 @@ public class ControlPanel extends JFrame
 
 	public void setSMotorPSEnable_val(String sMotorPSEnable_val)
 	{
-		SMotorPSEnable_val.setText(sMotorPSEnable_val);
+		SMovementMotorEnable_val.setText(sMotorPSEnable_val);
 	}
 
 	public void setFRglobal1_val(String fRglobal1_val)
@@ -1104,9 +1265,9 @@ public class ControlPanel extends JFrame
 		btnManual.setBackground(col);
 	}
 
-	public void setColorbtnAuto(Color col)
+	public void setColorbtnLiveFollow(Color col)
 	{
-		btnAuto.setBackground(col);
+		btnLineFollow.setBackground(col);
 	}
 
 	public void setColorbtnUDPLiveFeed(Color col)
@@ -1114,9 +1275,19 @@ public class ControlPanel extends JFrame
 		btnUDPLiveFeed.setBackground(col);
 	}
 
-	public void setColorbtnMotorPSEnable(Color col)
+	public void setColorbtnMovementMotorEnable(Color col)
 	{
-		btnMotorPSEnable.setBackground(col);
+		btnMovementMotorEnable.setBackground(col);
+	}
+	
+	public void setColorbtnTurretMotorEnable(Color col)
+	{
+		btnTurretMotorEnable.setBackground(col);
+	}
+	
+	public void setColorbtnSurvey(Color col)
+	{
+		btnSurvey.setBackground(col);
 	}
 
 }
