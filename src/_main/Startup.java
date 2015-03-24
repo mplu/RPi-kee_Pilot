@@ -21,8 +21,8 @@ public class Startup
 
 		Params p = new Params();
 
-		Client.setIP_address("localhost");// 176.189.122.201 //localhost
-		Client.setConnection_port(6524);
+		Client.setIP_address("176.189.122.201");// 176.189.122.201 //localhost
+		Client.setConnection_port(6528);
 		Client.setConnect(false);
 		Client.startClient();
 
@@ -77,14 +77,14 @@ public class Startup
 				// LeftMotorCommand
 				RPK_in = RPK_out.Read(p.LeftMotorCommand.ParamID, p.LeftMotorCommand.Size);
 				p.LeftMotorCommand.SetParam(RPK_in.getData());
-				fenprinc.setLb_LMCDelay_val(Integer.toString(p.LeftMotorCommand.Delay));
-				fenprinc.setLb_LMCSteps_val(Integer.toString(p.LeftMotorCommand.Steps));
+				fenprinc.setLb_LMCUnused_val(Integer.toString(p.LeftMotorCommand.Unused));
+				fenprinc.setLb_LMCSpeed_val(Integer.toString(p.LeftMotorCommand.Speed));
 
 				// RightMotorCommand
 				RPK_in = RPK_out.Read(p.RightMotorCommand.ParamID, p.RightMotorCommand.Size);
 				p.RightMotorCommand.SetParam(RPK_in.getData());
-				fenprinc.setLb_RMCDelay_val(Integer.toString(p.RightMotorCommand.Delay));
-				fenprinc.setLb_RMCSteps_val(Integer.toString(p.RightMotorCommand.Steps));
+				fenprinc.setLb_RMCUnused_val(Integer.toString(p.RightMotorCommand.Unused));
+				fenprinc.setLb_RMCSpeed_val(Integer.toString(p.RightMotorCommand.Speed));
 
 				// CommandReg
 				RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);

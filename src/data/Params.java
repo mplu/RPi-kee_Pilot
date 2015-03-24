@@ -4,8 +4,8 @@ public class Params
 {
 	public class t_MOTOR_COMMAND
 	{
-		public short Steps;
-		public short Delay;
+		public short Speed;
+		public short Unused;
 		public int ParamID;
 		public int Size;
 
@@ -18,17 +18,17 @@ public class Params
 		public byte[] toBytes()
 		{
 			byte data[] = new byte[Size];
-			data[0] = (byte) (0xFF & Steps);
-			data[1] = (byte) ((0xFF00 & Steps) >> 8);
-			data[2] = (byte) (0xFF & Delay);
-			data[3] = (byte) ((0xFF00 & Delay) >> 8);
+			data[0] = (byte) (0xFF & Speed);
+			data[1] = (byte) ((0xFF00 & Speed) >> 8);
+			data[2] = (byte) (0xFF & Unused);
+			data[3] = (byte) ((0xFF00 & Unused) >> 8);
 			return data;
 		}
 
 		public void SetParam(byte data[])
 		{
-			Steps = CombineBytes(data[0], data[1]);
-			Delay = CombineBytes(data[2], data[3]);
+			Speed = CombineBytes(data[0], data[1]);
+			Unused = CombineBytes(data[2], data[3]);
 		}
 
 	};

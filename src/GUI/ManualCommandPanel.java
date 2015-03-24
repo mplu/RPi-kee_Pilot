@@ -172,7 +172,7 @@ public class ManualCommandPanel extends JFrame implements KeyListener
 		RPK_in = RPK_out.Read(p.CommandReg.ParamID, p.CommandReg.Size);
 		p.CommandReg.SetParam(RPK_in.getData());
 
-		p.CommandReg.MoveDuration = 3000;
+		p.CommandReg.MoveDuration = 1000;
 		switch (dir)
 		{
 			case forward:

@@ -59,13 +59,13 @@ public class ControlPanel extends JFrame
 	private JLabel lb_AuxTemperature_val;
 	private JLabel lb_ImgMoveDirection_val;
 
-	// LeftMotorCommand
-	private JLabel lb_LMCSteps;
-	private JLabel lb_LMCDelay;
-	private JLabel lb_LMCSteps_val;
-	private JLabel lb_LMCDelay_val;
-	private JLabel lb_RMCSteps_val;
-	private JLabel lb_RMCDelay_val;
+	// Left&RightMotorCommand
+	private JLabel lb_LMCSpeed;
+	private JLabel lb_LMCUnused;
+	private JLabel lb_LMCSpeed_val;
+	private JLabel lb_LMCUnused_val;
+	private JLabel lb_RMCSpeed_val;
+	private JLabel lb_RMCUnused_val;
 
 	// CommandReg
 	private JLabel CManual;
@@ -154,7 +154,7 @@ public class ControlPanel extends JFrame
 	public ControlPanel()
 	{
 		setTitle("R-Pikee Pilot");
-		setSize(628, 574);
+		setSize(572, 507);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		main_panel = new JPanel();
@@ -407,46 +407,46 @@ public class ControlPanel extends JFrame
 		panel_MotorCommanddata.add(lblRightMotor, gbc_lblRightMotor);
 
 		// LeftMotorCommand
-		lb_LMCSteps = new JLabel("Steps");
-		GridBagConstraints gbc_lb_LMCSteps = new GridBagConstraints();
-		gbc_lb_LMCSteps.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lb_LMCSteps.insets = new Insets(0, 0, 5, 5);
-		gbc_lb_LMCSteps.gridx = 0;
-		gbc_lb_LMCSteps.gridy = 1;
-		panel_MotorCommanddata.add(lb_LMCSteps, gbc_lb_LMCSteps);
-		lb_LMCSteps_val = new JLabel("0");
-		GridBagConstraints gbc_lb_LMCSteps_val = new GridBagConstraints();
-		gbc_lb_LMCSteps_val.anchor = GridBagConstraints.NORTH;
-		gbc_lb_LMCSteps_val.insets = new Insets(0, 0, 5, 5);
-		gbc_lb_LMCSteps_val.gridx = 1;
-		gbc_lb_LMCSteps_val.gridy = 1;
-		panel_MotorCommanddata.add(lb_LMCSteps_val, gbc_lb_LMCSteps_val);
-		lb_RMCSteps_val = new JLabel("0");
-		GridBagConstraints gbc_lb_RMCSteps_val = new GridBagConstraints();
-		gbc_lb_RMCSteps_val.insets = new Insets(0, 0, 5, 0);
-		gbc_lb_RMCSteps_val.gridx = 2;
-		gbc_lb_RMCSteps_val.gridy = 1;
-		panel_MotorCommanddata.add(lb_RMCSteps_val, gbc_lb_RMCSteps_val);
+		lb_LMCSpeed = new JLabel("Speed");
+		GridBagConstraints gbc_lb_LMCSpeed = new GridBagConstraints();
+		gbc_lb_LMCSpeed.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lb_LMCSpeed.insets = new Insets(0, 0, 5, 5);
+		gbc_lb_LMCSpeed.gridx = 0;
+		gbc_lb_LMCSpeed.gridy = 1;
+		panel_MotorCommanddata.add(lb_LMCSpeed, gbc_lb_LMCSpeed);
+		lb_LMCSpeed_val = new JLabel("0");
+		GridBagConstraints gbc_lb_LMCSpeed_val = new GridBagConstraints();
+		gbc_lb_LMCSpeed_val.anchor = GridBagConstraints.NORTH;
+		gbc_lb_LMCSpeed_val.insets = new Insets(0, 0, 5, 5);
+		gbc_lb_LMCSpeed_val.gridx = 1;
+		gbc_lb_LMCSpeed_val.gridy = 1;
+		panel_MotorCommanddata.add(lb_LMCSpeed_val, gbc_lb_LMCSpeed_val);
+		lb_RMCSpeed_val = new JLabel("0");
+		GridBagConstraints gbc_lb_RMCSpeed_val = new GridBagConstraints();
+		gbc_lb_RMCSpeed_val.insets = new Insets(0, 0, 5, 0);
+		gbc_lb_RMCSpeed_val.gridx = 2;
+		gbc_lb_RMCSpeed_val.gridy = 1;
+		panel_MotorCommanddata.add(lb_RMCSpeed_val, gbc_lb_RMCSpeed_val);
 
-		lb_LMCDelay = new JLabel("Delay");
-		GridBagConstraints gbc_lb_LMCDelay = new GridBagConstraints();
-		gbc_lb_LMCDelay.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lb_LMCDelay.insets = new Insets(0, 0, 0, 5);
-		gbc_lb_LMCDelay.gridx = 0;
-		gbc_lb_LMCDelay.gridy = 2;
-		panel_MotorCommanddata.add(lb_LMCDelay, gbc_lb_LMCDelay);
-		lb_LMCDelay_val = new JLabel("0");
-		GridBagConstraints gbc_lb_LMCDelay_val = new GridBagConstraints();
-		gbc_lb_LMCDelay_val.insets = new Insets(0, 0, 0, 5);
-		gbc_lb_LMCDelay_val.anchor = GridBagConstraints.NORTH;
-		gbc_lb_LMCDelay_val.gridx = 1;
-		gbc_lb_LMCDelay_val.gridy = 2;
-		panel_MotorCommanddata.add(lb_LMCDelay_val, gbc_lb_LMCDelay_val);
-		lb_RMCDelay_val = new JLabel("0");
-		GridBagConstraints gbc_lb_RMCDelay_val = new GridBagConstraints();
-		gbc_lb_RMCDelay_val.gridx = 2;
-		gbc_lb_RMCDelay_val.gridy = 2;
-		panel_MotorCommanddata.add(lb_RMCDelay_val, gbc_lb_RMCDelay_val);
+		lb_LMCUnused = new JLabel("Unused");
+		GridBagConstraints gbc_lb_LMCUnused = new GridBagConstraints();
+		gbc_lb_LMCUnused.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lb_LMCUnused.insets = new Insets(0, 0, 0, 5);
+		gbc_lb_LMCUnused.gridx = 0;
+		gbc_lb_LMCUnused.gridy = 2;
+		panel_MotorCommanddata.add(lb_LMCUnused, gbc_lb_LMCUnused);
+		lb_LMCUnused_val = new JLabel("0");
+		GridBagConstraints gbc_lb_LMCUnused_val = new GridBagConstraints();
+		gbc_lb_LMCUnused_val.insets = new Insets(0, 0, 0, 5);
+		gbc_lb_LMCUnused_val.anchor = GridBagConstraints.NORTH;
+		gbc_lb_LMCUnused_val.gridx = 1;
+		gbc_lb_LMCUnused_val.gridy = 2;
+		panel_MotorCommanddata.add(lb_LMCUnused_val, gbc_lb_LMCUnused_val);
+		lb_RMCUnused_val = new JLabel("0");
+		GridBagConstraints gbc_lb_RMCUnused_val = new GridBagConstraints();
+		gbc_lb_RMCUnused_val.gridx = 2;
+		gbc_lb_RMCUnused_val.gridy = 2;
+		panel_MotorCommanddata.add(lb_RMCUnused_val, gbc_lb_RMCUnused_val);
 
 		panel_CommandReg = new JPanel();
 		panel_CommandReg.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -1154,24 +1154,24 @@ public class ControlPanel extends JFrame
 		this.txf_paramversion.setText(txf_paramversion);
 	}
 
-	public void setLb_LMCSteps_val(String lb_LMCSteps_val)
+	public void setLb_LMCSpeed_val(String lb_LMCSpeed_val)
 	{
-		this.lb_LMCSteps_val.setText(lb_LMCSteps_val);
+		this.lb_LMCSpeed_val.setText(lb_LMCSpeed_val);
 	}
 
-	public void setLb_LMCDelay_val(String lb_LMCDelay_val)
+	public void setLb_LMCUnused_val(String lb_LMCUnused_val)
 	{
-		this.lb_LMCDelay_val.setText(lb_LMCDelay_val);
+		this.lb_LMCUnused_val.setText(lb_LMCUnused_val);
 	}
 
-	public void setLb_RMCSteps_val(String lb_RMCSteps_val)
+	public void setLb_RMCSpeed_val(String lb_RMCSpeed_val)
 	{
-		this.lb_RMCSteps_val.setText(lb_RMCSteps_val);
+		this.lb_RMCSpeed_val.setText(lb_RMCSpeed_val);
 	}
 
-	public void setLb_RMCDelay_val(String lb_RMCDelay_val)
+	public void setLb_RMCUnused_val(String lb_RMCUnused_val)
 	{
-		this.lb_RMCDelay_val.setText(lb_RMCDelay_val);
+		this.lb_RMCUnused_val.setText(lb_RMCUnused_val);
 	}
 
 	public void setCManual_val(String cManual_val)
